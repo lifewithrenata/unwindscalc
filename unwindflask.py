@@ -55,9 +55,7 @@ template = """
     <script>
     function copyResult() {
       var text = document.querySelector('.result-box').innerText;
-      navigator.clipboard.writeText(text).then(function() {
-        alert('Copied to clipboard');
-      });
+      navigator.clipboard.writeText(text);
     }
     </script>
     {% endif %}
