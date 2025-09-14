@@ -89,7 +89,7 @@ template = """
 <body>
   <div class="wrap">
     <div class="card">
-      <h1>Unwind Fee Calculator <span class="pill">Render</span></h1>
+      <h1>Unwind Fee Calculator</h1>
       <div class="sub">Enter DV01, direction, and rates; we’ll handle the rest.</div>
       <form method="post">
         <div class="field third">
