@@ -97,6 +97,10 @@ template = """
           <input id="dv01" name="dv01" type="text" inputmode="decimal" placeholder="e.g. 12,345" value="{{ request.form.dv01 }}">
         </div>
         <div class="field third">
+          <label for="client">Client Name</label>
+          <input id="client" name="client" type="text" placeholder="e.g. ABC Fund" value="{{ request.form.client }}">
+        </div>
+        <div class="field third">
           <label for="direction">Client's original direction</label>
           <select id="direction" name="direction">
             <option value="pays" {% if request.form.direction == 'pays' %}selected{% endif %}>Pays fixed</option>
@@ -152,6 +156,7 @@ def unwind():
     if request.method == "POST":
         try:
             dv01 = float(request.form["dv01"].replace(",", ""))
+            client = request.form["client"].strip()
             direction = request.form["direction"].lower().strip()
             old_rate = float(request.form["old_rate"]) / 100
             new_rate = float(request.form["new_rate"]) / 100
@@ -166,17 +171,17 @@ def unwind():
                 fee = s * dv01 * delta_bps
 
                 if fee > 0:
-                    label = f"Client receives {fee:,.2f}"
+                    label = f"{client} receives {fee:,.2f}"
                 elif fee < 0:
-                    label = f"Client pays {abs(fee):,.2f}"
+                    label = f"{client} pays {abs(fee):,.2f}"
                 else:
-                    label = "No unwind fee (flat)"
+                    label = f"{client}: No unwind fee (flat)"
 
                 today_phrase = "today client receives at" if direction == "pays" else "today client pays at"
 
                 result = (
                     f"Unwind Fee:\n"
-                    f"Client {direction} fixed at {old_rate*100:.4f}% → {today_phrase} {new_rate*100:.4f}%\n"
+                    f"{client} {direction} fixed at {old_rate*100:.4f}% → {today_phrase} {new_rate*100:.4f}%\n"
                     f"{label}\n\n"
                     f"Details:\nDV01: {dv01:,.2f}\nMove: {delta_bps:,.2f} bps\n"
                     f"Timestamp: {datetime.now().strftime('%d %b %Y %H:%M:%S')}"
