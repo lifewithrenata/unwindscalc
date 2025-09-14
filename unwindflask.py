@@ -32,7 +32,7 @@ template = """
         <label>DV01:</label>
         <input type="text" name="dv01" value="{{ request.form.dv01 }}"><br>
 
-        <label>Original Direction (pays/receives):</label>
+        <label>Client's Original Direction (pays/receives):</label>
             <select name="direction">
             <option value="pays" {% if request.form.direction == 'pays' %}selected{% endif %}>pays</option>
             <option value="receives" {% if request.form.direction == 'receives' %}selected{% endif %}>receives</option>
