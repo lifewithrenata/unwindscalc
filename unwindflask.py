@@ -90,7 +90,7 @@ template = """
   <div class="wrap">
     <div class="card">
       <h1>Unwind Fee Calculator <span class="pill">Render</span></h1>
-      <div class="sub">A clean, single-screen tool for quick client unwind quotes. Enter DV01, direction, and rates; we’ll format the rest.</div>
+      <div class="sub">Enter DV01, direction, and rates; we’ll handle the rest.</div>
       <form method="post">
         <div class="field third">
           <label for="dv01">DV01</label>
@@ -114,7 +114,7 @@ template = """
         <div class="field" style="grid-column: span 12; display:flex; gap:10px;">
           <button type="submit" class="btn">Calculate</button>
           {% if result %}
-          <button type="button" class="btn ghost" onclick="copyResult()">Copy result</button>
+          <button type="button" class="btn ghost" onclick="copyResult()">Copy to Clipboard</button>
           {% endif %}
         </div>
       </form>
@@ -127,13 +127,6 @@ template = """
         </div>
         <div class="spacer"></div>
         <pre style="margin:0; white-space:pre-wrap;">{{ result }}</pre>
-        <div class="kvs">
-          {# Quick parse to pull out a few lines visually #}
-          <div class="kv">{{ ('Direction: ' + request.form.direction)|title if request.form.direction }}</div>
-          <div class="kv">{{ ('Old %: ' + request.form.old_rate) if request.form.old_rate }}</div>
-          <div class="kv">{{ ('New %: ' + request.form.new_rate) if request.form.new_rate }}</div>
-          <div class="kv">{{ ('DV01: ' + request.form.dv01) if request.form.dv01 }}</div>
-        </div>
       </div>
       {% endif %}
 
