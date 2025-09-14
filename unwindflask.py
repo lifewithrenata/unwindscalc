@@ -114,7 +114,7 @@ template = """
         <div class="field" style="grid-column: span 12; display:flex; gap:10px;">
           <button type="submit" class="btn">Calculate</button>
           {% if result %}
-          <button type="button" class="btn ghost" onclick="copyResult()">Copy to Clipboard</button>
+          <button type="button" class="btn" onclick="copyResult()">Copy to Clipboard</button>
           {% endif %}
         </div>
       </form>
