@@ -177,7 +177,7 @@ def unwind():
                 else:
                     label = f"{client}: No unwind fee (flat)"
 
-                today_phrase = "today client receives at" if direction == "pays" else "today client pays at"
+                today_phrase = f"today {client} receives at" if direction == "pays" else f"today {client} pays at"
 
                 result = (
                     f"Unwind Fee:\n"
